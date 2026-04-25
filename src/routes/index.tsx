@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Header } from "@/components/gmenu/Header";
 import { Footer } from "@/components/gmenu/Footer";
@@ -6,6 +6,7 @@ import { Hero } from "@/components/gmenu/Hero";
 import { Benefits } from "@/components/gmenu/Benefits";
 import { Differentiator } from "@/components/gmenu/Differentiator";
 import { FinalCTA } from "@/components/gmenu/FinalCTA";
+import { RegisterForm } from "@/components/gmenu/RegisterForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,7 +57,7 @@ function Index() {
       <Differentiator />
 
       {/* Modules preview */}
-      <section className="bg-white py-32 lg:py-44">
+      <section id="modulos" className="bg-white py-32 lg:py-44">
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
             <div className="max-w-2xl">
@@ -68,12 +69,12 @@ function Index() {
                 Activa solo lo que necesitas. Suma capacidades cuando tu operación lo pida.
               </p>
             </div>
-            <Link
-              to="/modulos"
+            <a
+              href="/modulos"
               className="ring-focus inline-flex items-center gap-1 text-[14px] font-medium text-navy transition hover:text-orange"
             >
               Ver todos los módulos <span aria-hidden>→</span>
-            </Link>
+            </a>
           </div>
 
           <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -100,7 +101,7 @@ function Index() {
       </section>
 
       {/* AI preview */}
-      <section className="bg-secondary py-32 lg:py-44">
+      <section id="ia" className="bg-secondary py-32 lg:py-44">
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -112,12 +113,12 @@ function Index() {
                 Gmenu IA observa tu operación, detecta patrones y te entrega señales claras
                 para decidir mejor — sin tableros complicados.
               </p>
-              <Link
-                to="/ia"
+              <a
+                href="/ia"
                 className="ring-focus mt-8 inline-flex items-center gap-1 text-[14px] font-medium text-navy transition hover:text-orange"
               >
                 Conoce Gmenu IA <span aria-hidden>→</span>
-              </Link>
+              </a>
             </div>
 
             <motion.div
@@ -158,7 +159,7 @@ function Index() {
       </section>
 
       {/* Plans summary */}
-      <section className="bg-white py-32 lg:py-44">
+      <section id="precios" className="bg-white py-32 lg:py-44">
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-[13px] font-medium text-teal">Planes</p>
@@ -191,20 +192,21 @@ function Index() {
                 <p className={`mt-2 text-[14px] ${p.featured ? "text-white/65" : "text-navy/55"}`}>
                   {p.desc}
                 </p>
-                <Link
-                  to="/precios"
+                <a
+                  href="/precios"
                   className={`ring-focus mt-10 inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-medium transition ${
                     p.featured ? "bg-orange text-white hover:brightness-110" : "bg-navy text-white hover:bg-navy/90"
                   }`}
                 >
                   Ver detalles
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      <RegisterForm />
       <FinalCTA />
       <Footer />
     </main>

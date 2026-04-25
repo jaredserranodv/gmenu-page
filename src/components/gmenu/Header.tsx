@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+
 import { Logo } from "./Logo";
 
-const links = [
-  { to: "/", label: "Inicio" },
-  { to: "/producto", label: "Producto" },
-  { to: "/ia", label: "IA" },
-  { to: "/precios", label: "Precios" },
-  { to: "/modulos", label: "Módulos" },
-  { to: "/registro", label: "Registro" },
-  { to: "/contacto", label: "Contacto" },
+const sectionLinks = [
+  { href: "/#inicio", label: "Inicio" },
+  { href: "/#producto", label: "Producto" },
+  { href: "/#ia", label: "IA" },
+  { href: "/#precios", label: "Precios" },
+  { href: "/#modulos", label: "Módulos" },
+  { href: "/#registro", label: "Registro" },
 ] as const;
+
+const routeLinks = [{ href: "/contacto", label: "Contacto" }] as const;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,32 +33,39 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-6">
-        <Link to="/" className="ring-focus" aria-label="Gmenu — inicio">
+        <a href="/#inicio" className="ring-focus" aria-label="Gmenu — inicio">
           <Logo tone="dark" className="h-6" />
-        </Link>
+        </a>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Principal">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              activeOptions={{ exact: l.to === "/" }}
-              activeProps={{ className: "text-navy" }}
-              inactiveProps={{ className: "text-navy/60 hover:text-navy" }}
-              className="ring-focus text-[13px] font-medium transition"
+          {sectionLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="ring-focus text-[13px] font-medium text-navy/60 transition hover:text-navy"
             >
               {l.label}
-            </Link>
+            </a>
+          ))}
+
+          {routeLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="ring-focus text-[13px] font-medium text-navy/60 transition hover:text-navy"
+            >
+              {l.label}
+            </a>
           ))}
         </nav>
 
         <div className="hidden lg:block">
-          <Link
-            to="/registro"
+          <a
+            href="/registro"
             className="ring-focus inline-flex items-center rounded-full bg-navy px-4 py-2 text-[13px] font-medium text-white transition hover:bg-navy/90"
           >
             Empieza gratis
-          </Link>
+          </a>
         </div>
 
         <button
@@ -66,34 +74,55 @@ export function Header() {
           aria-label="Abrir menú"
           aria-expanded={open}
         >
-          <span className={`block h-px w-5 bg-current transition ${open ? "translate-y-[3px] rotate-45" : ""}`} />
-          <span className={`block h-px w-5 bg-current transition ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
+          <span
+            className={`block h-px w-5 bg-current transition ${
+              open ? "translate-y-[3px] rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`block h-px w-5 bg-current transition ${
+              open ? "-translate-y-[3px] -rotate-45" : ""
+            }`}
+          />
         </button>
       </div>
 
       {open && (
         <div className="lg:hidden border-t border-hairline bg-white/95 backdrop-blur-xl">
           <div className="mx-auto flex max-w-[1200px] flex-col gap-1 px-6 py-4">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
+            {sectionLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-3 text-[15px] text-navy/80 hover:bg-secondary"
               >
                 {l.label}
-              </Link>
+              </a>
             ))}
-            <Link
-              to="/registro"
+
+            {routeLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-3 text-[15px] text-navy/80 hover:bg-secondary"
+              >
+                {l.label}
+              </a>
+            ))}
+
+            <a
+              href="/registro"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-navy px-5 py-3 text-center text-[14px] font-medium text-white"
             >
               Empieza gratis
-            </Link>
+            </a>
           </div>
         </div>
       )}
     </header>
   );
 }
+

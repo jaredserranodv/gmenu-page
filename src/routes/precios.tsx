@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Header } from "@/components/gmenu/Header";
 import { Footer } from "@/components/gmenu/Footer";
@@ -119,14 +119,14 @@ function PreciosPage() {
                   ))}
                 </ul>
 
-                <Link
-                  to="/registro"
+                <a
+                  href="/registro"
                   className={`ring-focus mt-10 inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-medium transition ${
                     p.featured ? "bg-orange text-white hover:brightness-110" : "bg-navy text-white hover:bg-navy/90"
                   }`}
                 >
                   Empezar con {p.name}
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>

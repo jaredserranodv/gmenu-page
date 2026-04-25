@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/gmenu/Header";
 import { Footer } from "@/components/gmenu/Footer";
@@ -70,12 +70,12 @@ function ContactoPage() {
                 <p className="mt-2 text-[14px] text-navy/60">
                   Activa tu prueba gratis de 1 mes sin tarjeta.
                 </p>
-                <Link
-                  to="/registro"
+                <a
+                  href="/registro"
                   className="ring-focus mt-5 inline-flex items-center justify-center rounded-full bg-orange px-5 py-3 text-[14px] font-medium text-white shadow-soft transition hover:brightness-110"
                 >
                   Empieza gratis
-                </Link>
+                </a>
               </div>
             </aside>
 

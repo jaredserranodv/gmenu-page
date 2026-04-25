@@ -60,6 +60,29 @@ This repository was migrated **incrementally** from a Vite-based React + TypeScr
 - `npm run build`: **Pass**
 - `npm run dev`: **Pass** (smoke tested on port 3001)
 
+## 2026-04-25: Next App Router x TanStack Router/history console error
+
+### Cause found
+- The console error “useInsertionEffect must not schedule updates” was also reproducible from the **TanStack Router/history** integration when running inside **Next.js App Router**.
+- Root cause in this repo: `app/spa.tsx` created the TanStack router during render (`useMemo(() => getRouter(), [])`) even on the initial render that returned `null`. Router initialization can touch browser history (`replaceState`) and/or schedule transitions during Next's initial commit/insertion phase, which React 19 flags.
+
+### Files modified
+- `app/spa.tsx`
+- `app/spa-shell.tsx`
+- `app/[[...slug]]/page.tsx`
+- `app/not-found.tsx`
+- `migration_status.md`
+
+### Solution applied
+- Ensured the SPA mounts **client-only** and avoids commit-time history writes:
+  - Load SPA via `dynamic(() => import("./spa"), { ssr: false })` in `app/spa-shell.tsx`
+  - Defer TanStack router creation to a post-commit `useEffect` (`requestAnimationFrame` + `queueMicrotask`) in `app/spa.tsx`
+  - Use `SpaShell` from both `app/[[...slug]]/page.tsx` and `app/not-found.tsx`
+
+### Final status
+- SPA still client-only: **Yes**
+- `npm run build`: **Pass**
+
 ## Phase 2 TODOs
 - Remove Vite completely (scripts, config, and dependencies) once no longer needed.
 - Migrate routes to **native Next.js App Router** (create `app/.../page.tsx` pages and move route-level metadata).

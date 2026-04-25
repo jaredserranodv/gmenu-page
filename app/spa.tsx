@@ -1,23 +1,32 @@
 "use client";
 
 import { RouterProvider } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getRouter } from "../src/router";
 
 export default function Spa() {
-  const [mounted, setMounted] = useState(false);
+  const [router, setRouter] = useState<ReturnType<typeof getRouter> | null>(null);
 
   useEffect(() => {
-    setMounted(true);
+    // Defer TanStack Router initialization until after Next's initial commit.
+    // This avoids `history.replaceState` running during the commit/insertion phase.
+    let cancelled = false;
+    const rafId = window.requestAnimationFrame(() => {
+      queueMicrotask(() => {
+        if (!cancelled) setRouter(getRouter());
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  // Keep a stable router instance for the whole SPA lifetime.
-  const router = useMemo(() => getRouter(), []);
-
   // TanStack Router isn't configured for SSR in this incremental migration.
-  // Rendering it only after mount avoids SSR-time crashes while keeping the app behavior.
-  if (!mounted) return null;
+  // Rendering only after client init avoids SSR-time crashes and avoids commit-time history writes.
+  if (!router) return null;
 
   return <RouterProvider router={router} />;
 }

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
 
 export function FinalCTA() {
   return (
@@ -18,21 +17,22 @@ export function FinalCTA() {
           </motion.h2>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/registro"
+            <a
+              href="/registro"
               className="ring-focus inline-flex items-center justify-center rounded-full bg-orange px-6 py-3.5 text-[15px] font-medium text-white transition hover:brightness-110"
             >
               Empieza gratis
-            </Link>
-            <Link
-              to="/contacto"
+            </a>
+            <a
+              href="/contacto"
               className="ring-focus inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-[15px] font-medium text-white transition hover:bg-white/10"
             >
               Solicita información <span aria-hidden>→</span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
     </section>
   );
 }
+

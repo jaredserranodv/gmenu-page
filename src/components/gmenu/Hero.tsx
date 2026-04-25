@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ScrollFadeText } from "@/components/ui/ScrollFadeText";
 
 export function Hero() {
   return (
@@ -18,17 +19,16 @@ export function Hero() {
         </motion.p>
 
         {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        <ScrollFadeText
+          as="h1"
+          fadeRange={[0.15, 0.9]}
+          offset={["start start", "end start"]}
+          parallaxY={-24}
           className="font-display mx-auto mt-6 max-w-[18ch] text-center text-[44px] font-semibold leading-[1.05] tracking-[-0.04em] text-navy text-balance sm:text-[64px] lg:text-[88px]"
         >
           Más que un punto de venta.
-          <span className="block text-navy/55">
-            Entiende y mejora tu restaurante.
-          </span>
-        </motion.h1>
+          <span className="block text-navy/55">Entiende y mejora tu restaurante.</span>
+        </ScrollFadeText>
 
         {/* Sub */}
         <motion.p
@@ -37,8 +37,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.25 }}
           className="mx-auto mt-8 max-w-[58ch] text-center text-pretty text-lg text-navy/65 lg:text-xl"
         >
-          Gmenu te ayuda a vender, controlar tu operación y descubrir información clave
-          para tomar mejores decisiones — con datos claros.
+          Gmenu te ayuda a vender, controlar tu operación y descubrir información clave para tomar
+          mejores decisiones — con datos claros.
         </motion.p>
 
         {/* CTAs */}
@@ -103,9 +103,7 @@ function ProductMockup() {
           <span className="h-2.5 w-2.5 rounded-full bg-navy/10" />
           <span className="h-2.5 w-2.5 rounded-full bg-navy/10" />
         </div>
-        <div className="text-[11px] font-medium tracking-wide text-navy/40">
-          gmenu · panel
-        </div>
+        <div className="text-[11px] font-medium tracking-wide text-navy/40">gmenu · panel</div>
         <div className="flex items-center gap-1.5 text-[11px] text-teal">
           <span className="h-1.5 w-1.5 rounded-full bg-teal" />
           En vivo
@@ -119,9 +117,8 @@ function ProductMockup() {
             {["Inicio", "Ventas", "Caja", "Inventario", "Insights"].map((t, i) => (
               <div
                 key={t}
-                className={`rounded-lg px-3 py-2 text-[13px] ${
-                  i === 4 ? "bg-navy text-white" : "text-navy/65 hover:bg-secondary"
-                }`}
+                className={`rounded-lg px-3 py-2 text-[13px] ${i === 4 ? "bg-navy text-white" : "text-navy/65 hover:bg-secondary"
+                  }`}
               >
                 {t}
               </div>
@@ -189,3 +186,4 @@ function ProductMockup() {
     </div>
   );
 }
+

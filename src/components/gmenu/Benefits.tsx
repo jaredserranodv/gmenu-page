@@ -9,7 +9,7 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <section id="beneficios" className="bg-white py-32 lg:py-44">
+    <section id="producto" className="bg-white py-32 lg:py-44">
       <div className="mx-auto max-w-[1120px] px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-[13px] font-medium text-teal">Lo esencial, refinado</p>

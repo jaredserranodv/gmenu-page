@@ -1,19 +1,20 @@
-import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 
-type FooterLink = { label: string; to?: string; href?: string };
+type FooterLink = { label: string; href: string };
 
 const productLinks: FooterLink[] = [
-  { label: "Producto", to: "/producto" },
-  { label: "IA", to: "/ia" },
-  { label: "Módulos", to: "/modulos" },
-  { label: "Precios", to: "/precios" },
+  { label: "Producto", href: "/producto" },
+  { label: "IA", href: "/ia" },
+  { label: "Módulos", href: "/modulos" },
+  { label: "Precios", href: "/precios" },
 ];
+
 const companyLinks: FooterLink[] = [
-  { label: "Inicio", to: "/" },
-  { label: "Registro", to: "/registro" },
-  { label: "Contacto", to: "/contacto" },
+  { label: "Inicio", href: "/" },
+  { label: "Registro", href: "/registro" },
+  { label: "Contacto", href: "/contacto" },
 ];
+
 const contactLinks: FooterLink[] = [
   { label: "hola@gmenu.app", href: "mailto:hola@gmenu.app" },
   { label: "+52 55 0000 0000", href: "tel:+5255" },
@@ -27,8 +28,8 @@ export function Footer() {
           <div className="lg:col-span-5">
             <Logo tone="dark" className="h-6" />
             <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-navy/60">
-              Gmenu es la plataforma para restaurantes y cafeterías que convierte tu operación
-              diaria en decisiones más inteligentes.
+              Gmenu es la plataforma para restaurantes y cafeterías que convierte tu operación diaria
+              en decisiones más inteligentes.
             </p>
           </div>
 
@@ -53,18 +54,13 @@ function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
       <ul className="mt-4 space-y-2.5 text-[14px]">
         {links.map((l) => (
           <li key={l.label}>
-            {l.to ? (
-              <Link to={l.to} className="text-navy/75 transition hover:text-orange">
-                {l.label}
-              </Link>
-            ) : (
-              <a href={l.href} className="text-navy/75 transition hover:text-orange">
-                {l.label}
-              </a>
-            )}
+            <a href={l.href} className="text-navy/75 transition hover:text-orange">
+              {l.label}
+            </a>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
